@@ -7,7 +7,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screens.HomeFragment">
+        tools:context=".screens.home.HomeFragment">
 
         <ImageView
             android:id="@+id/bgnd_image"
@@ -30,8 +30,10 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_recycler_view"
             android:layout_width="0dp"
-            android:layout_height="450dp"
+            android:layout_height="480dp"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -40,7 +42,7 @@
             android:id="@+id/button"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="28dp"
             android:background="@drawable/btn_bckgrnd"
             android:fontFamily="@font/cairo"
             android:text="Buy Ticket"

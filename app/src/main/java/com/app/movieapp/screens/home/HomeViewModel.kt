@@ -1,4 +1,4 @@
-package com.app.movieapp.screens
+package com.app.movieapp.screens.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import com.app.movieapp.R
 import com.app.movieapp.models.Movie
 
 class HomeViewModel: ViewModel() {
-    private val movies = MutableLiveData<MutableList<Movie>>()
+    val movies = MutableLiveData<MutableList<Movie>>()
 
     fun setUpMoviesList(){
         val moviesList = mutableListOf<Movie>()
