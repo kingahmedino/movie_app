@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.movieapp.databinding.MovieListItemBinding
 import com.app.movieapp.models.Movie
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class MoviesAdapter(
     private val mContext: Context,
@@ -24,6 +26,12 @@ class MoviesAdapter(
     override fun onBindViewHolder(holder: BindingHolder, position: Int) {
         val movie = mMoviesList[position]
         holder.mBinding?.movie = movie
+        Glide.with(mContext)
+            .load(movie.imageUrl)
+            .placeholder(movie.placeHolder)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(holder.mBinding?.movieImageView)
+
         holder.mBinding?.executePendingBindings()
     }
 
