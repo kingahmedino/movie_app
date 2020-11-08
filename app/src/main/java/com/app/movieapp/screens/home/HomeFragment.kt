@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.movieapp.adapters.CenterScaleLayoutManager
 import com.app.movieapp.adapters.MoviesAdapter
 import com.app.movieapp.databinding.FragmentHomeBinding
 
@@ -34,7 +35,7 @@ class HomeFragment : Fragment() {
         viewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
             mBinding.homeRecyclerView.also {
                 it.layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    CenterScaleLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 it.setHasFixedSize(true)
                 it.adapter = MoviesAdapter(requireContext(), movies)
             }
