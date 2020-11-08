@@ -10,32 +10,40 @@ class CenterScaleLayoutManager(context: Context?, orientation: Int, reverseLayou
     private val mShrinkAmount = 0.15F
     private val mShrinkDistance = 0.9F
 
+    override fun onLayoutCompleted(state: RecyclerView.State?) {
+        super.onLayoutCompleted(state)
+        scaleChildren()
+    }
+
     override fun scrollHorizontallyBy(
         dx: Int,
         recycler: RecyclerView.Recycler?,
         state: RecyclerView.State?
     ): Int {
         val orientation = orientation
-        if (orientation == HORIZONTAL) {
-            val scrolled = super.scrollHorizontallyBy(dx, recycler, state)
+        return if (orientation == HORIZONTAL) {
+            scaleChildren()
+            super.scrollHorizontallyBy(dx, recycler, state)
+        } else {
+            0
+        }
 
-            val midPoint = width / 2F
-            val d0 = 0F
-            val d1 = mShrinkDistance * midPoint
-            val s0 = 1F
-            val s1 = 1F - mShrinkAmount
-            for (i in 0 until childCount) {
-                val child = getChildAt(i) as View
-                val childMidPoint =
-                    (getDecoratedRight(child) + getDecoratedLeft(child)) / 2F
-                val d = Math.min(d1, Math.abs(midPoint - childMidPoint))
-                val scale = s0 + (s1 - s0) * (d - d0) / (d1 - d0)
-                child.scaleX = scale
-                child.scaleY = scale
-            }
-            return scrolled
-        } else
-            return 0
+    }
 
+    private fun scaleChildren() {
+        val midPoint = width / 2F
+        val d0 = 0F
+        val d1 = mShrinkDistance * midPoint
+        val s0 = 1F
+        val s1 = 1F - mShrinkAmount
+        for (i in 0 until childCount) {
+            val child = getChildAt(i) as View
+            val childMidPoint =
+                (getDecoratedRight(child) + getDecoratedLeft(child)) / 2F
+            val d = Math.min(d1, Math.abs(midPoint - childMidPoint))
+            val scale = s0 + (s1 - s0) * (d - d0) / (d1 - d0)
+            child.scaleX = scale
+            child.scaleY = scale
+        }
     }
 }
