@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.app.movieapp.adapters.CenterScaleLayoutManager
 import com.app.movieapp.adapters.MoviesAdapter
 import com.app.movieapp.databinding.FragmentHomeBinding
@@ -27,6 +28,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = FragmentHomeBinding.inflate(inflater)
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(mBinding.homeRecyclerView)
         return mBinding.root
     }
 
