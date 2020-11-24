@@ -15,10 +15,14 @@ import com.app.movieapp.R
 import com.app.movieapp.adapters.CenterScaleLayoutManager
 import com.app.movieapp.adapters.MoviesAdapter
 import com.app.movieapp.databinding.FragmentHomeBinding
+import com.app.movieapp.databinding.MovieDetailLayoutBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class HomeFragment : Fragment() {
     lateinit var mBinding: FragmentHomeBinding
+    lateinit var bottomSheetBinding: MovieDetailLayoutBinding
     lateinit var viewModel: HomeViewModel
+    lateinit var bottomSheetDialog: BottomSheetDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +35,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = FragmentHomeBinding.inflate(inflater)
+        bottomSheetBinding = MovieDetailLayoutBinding.inflate(inflater)
+        bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val bottomSheetView = LayoutInflater.from(context).inflate(
+            R.layout.movie_detail_layout,
+            bottomSheetBinding.bottomSheet
+        )
+        bottomSheetDialog.setContentView(bottomSheetView)
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(mBinding.homeRecyclerView)
         return mBinding.root
@@ -53,6 +64,10 @@ class HomeFragment : Fragment() {
                 changeBackgroundImage(recyclerView.layoutManager as LinearLayoutManager)
             }
         })
+
+        mBinding.button.setOnClickListener {
+            bottomSheetDialog.show()
+        }
     }
 
     private fun changeBackgroundImage(layoutManager: LinearLayoutManager) {

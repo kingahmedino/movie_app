@@ -11,5 +11,13 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">24dp</item>
     </style>
+    
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@color/colorTransparent</item>
+    </style>
 
 </resources>
