@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <variable
             name="movie"
             type="com.app.movieapp.models.Movie" />
+        <variable
+            name="isFirstItem"
+            type="java.lang.Boolean" />
+        <variable
+            name="isLastItem"
+            type="java.lang.Boolean" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="260dp"
         android:layout_height="480dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        layoutMarginStart="@{isFirstItem ? @dimen/dp_50 : @dimen/dp_6}"
+        layoutMarginEnd="@{isLastItem ? @dimen/dp_50 : @dimen/dp_6}"
         android:background="@drawable/movie_background"
-        android:elevation="4dp"
+        android:elevation="2dp"
         android:padding="5dp">
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -24,7 +32,7 @@
             android:layout_marginTop="20dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/hustle_2"
+            tools:src="@drawable/hustle_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

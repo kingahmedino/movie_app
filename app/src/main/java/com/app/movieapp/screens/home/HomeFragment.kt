@@ -44,7 +44,6 @@ class HomeFragment : Fragment() {
                     CenterScaleLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 it.setHasFixedSize(true)
                 it.adapter = MoviesAdapter(requireContext(), movies)
-                changeBackgroundImage(it.layoutManager as LinearLayoutManager)
             }
         })
 

@@ -25,6 +25,10 @@ class MoviesAdapter(
 
     override fun onBindViewHolder(holder: BindingHolder, position: Int) {
         val movie = mMoviesList[position]
+        if (position == 0)
+            holder.mBinding!!.isFirstItem = true
+        else if (position == mMoviesList.size - 1)
+            holder.mBinding!!.isLastItem = true
         holder.mBinding?.movie = movie
         Glide.with(mContext)
             .load(movie.imageUrl)
