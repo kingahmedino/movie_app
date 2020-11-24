@@ -50,12 +50,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
-            mBinding.homeRecyclerView.also {
-                it.layoutManager =
-                    CenterScaleLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                it.setHasFixedSize(true)
-                it.adapter = MoviesAdapter(requireContext(), movies)
-            }
+            mBinding.movies = movies
         })
 
         mBinding.homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
