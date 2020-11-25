@@ -10,11 +10,11 @@ class HomeViewModel: ViewModel() {
 
     fun setUpMoviesList(){
         val moviesList = mutableListOf<Movie>()
-        moviesList.add(Movie("Joker", null, R.drawable.joker_1))
-        moviesList.add(Movie("The Hustle", null, R.drawable.hustle_2))
-        moviesList.add(Movie("Bad Boys for Life", null, R.drawable.badboys_1))
-        moviesList.add(Movie("The Old Guard", null, R.drawable.old_guard_2))
-        moviesList.add(Movie("Sonic The Hedgehog", null, R.drawable.sonic_1))
+        moviesList.add(Movie("Joker", null, R.drawable.joker_1, null))
+        moviesList.add(Movie("The Hustle", null, R.drawable.hustle_2, null))
+        moviesList.add(Movie("Bad Boys for Life", null, R.drawable.badboys_1, null))
+        moviesList.add(Movie("The Old Guard", null, R.drawable.old_guard_2, null))
+        moviesList.add(Movie("Sonic The Hedgehog", null, R.drawable.sonic_1, null))
 
         movies.value = moviesList
     }
