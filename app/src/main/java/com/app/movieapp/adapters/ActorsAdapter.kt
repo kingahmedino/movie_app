@@ -25,6 +25,12 @@ class ActorsAdapter(
 
     override fun onBindViewHolder(holder: BindingHolder, position: Int) {
         val actor = mActorsList[position]
+
+        if (position == 0)
+            holder.mBinding!!.isFirstItem = true
+        else if (position == mActorsList.size - 1)
+            holder.mBinding!!.isLastItem = true
+
         holder.mBinding?.actor = actor
         Glide.with(mContext)
             .load(actor.image)

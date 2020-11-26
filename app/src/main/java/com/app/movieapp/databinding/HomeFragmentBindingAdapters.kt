@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.movieapp.adapters.ActorsAdapter
 import com.app.movieapp.adapters.CenterScaleLayoutManager
 import com.app.movieapp.adapters.MoviesAdapter
+import com.app.movieapp.models.Actor
 import com.app.movieapp.models.Movie
 
 @BindingAdapter("layoutMarginStart")
@@ -31,8 +33,22 @@ fun setMoviesList(recyclerView: RecyclerView, movies: MutableList<Movie>) {
             CenterScaleLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
     }
     var adapter = recyclerView.adapter
-    if (adapter == null){
+    if (adapter == null) {
         adapter = MoviesAdapter(recyclerView.context, movies)
+        recyclerView.adapter = adapter
+    }
+}
+
+@BindingAdapter("actorsList")
+fun setMActorsList(recyclerView: RecyclerView, actors: MutableList<Actor>) {
+    val layoutManager = recyclerView.layoutManager
+    if (layoutManager == null) {
+        recyclerView.layoutManager =
+            LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
+    }
+    var adapter = recyclerView.adapter
+    if (adapter == null) {
+        adapter = ActorsAdapter(recyclerView.context, actors)
         recyclerView.adapter = adapter
     }
 }
