@@ -20,10 +20,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class HomeFragment : Fragment() {
-    lateinit var mBinding: FragmentHomeBinding
-    lateinit var viewModel: HomeViewModel
-    lateinit var bottomSheetBinding: MovieDetailLayoutBinding
-    lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var mBinding: FragmentHomeBinding
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var bottomSheetBinding: MovieDetailLayoutBinding
+    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
