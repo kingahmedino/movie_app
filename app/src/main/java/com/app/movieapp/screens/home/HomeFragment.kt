@@ -28,7 +28,6 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        viewModel.setUpMoviesList()
     }
 
     override fun onCreateView(
