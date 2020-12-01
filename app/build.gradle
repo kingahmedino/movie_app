@@ -40,6 +40,10 @@ dependencies {
     //glide
     implementation 'com.github.bumptech.glide:glide:3.8.0'
 
+    //web service requests
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
     //lifecycle dependencies
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
     implementation "androidx.lifecycle:lifecycle-livedata:2.2.0"
