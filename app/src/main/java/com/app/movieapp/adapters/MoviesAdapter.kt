@@ -13,8 +13,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class MoviesAdapter(
     private val mContext: Context,
-    private val mMoviesList: MutableList<Movie>
+    private val mMoviesList: List<Movie>
 ) : RecyclerView.Adapter<MoviesAdapter.BindingHolder>() {
+    private val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w300"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingHolder {
         val binding = MovieListItemBinding.inflate(LayoutInflater.from(mContext), parent, false)
@@ -31,7 +32,7 @@ class MoviesAdapter(
             holder.mBinding!!.isLastItem = true
         holder.mBinding?.movie = movie
         Glide.with(mContext)
-            .load(movie.imageUrl)
+            .load(IMAGE_BASE_URL + movie.poster_path)
             .placeholder(movie.placeHolder)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.mBinding?.movieImageView)

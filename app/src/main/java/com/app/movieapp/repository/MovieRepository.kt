@@ -10,23 +10,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 object MovieRepository {
-    private val movieLiveData = MutableLiveData<List<Movie>>()
-    private lateinit var actors: List<Actor>
 
-    fun getMovies(page: Int = 1): LiveData<List<Movie>> {
-        GlobalScope.launch(Dispatchers.IO) {
-            val response = BackendAPI.invoke().searchPopularMovies(page)
-            val movies = response.results
-            movieLiveData.postValue(movies)
-        }
-        return movieLiveData
+    suspend fun getMovies(page: Int = 1): List<Movie> {
+        val response = BackendAPI.invoke().searchPopularMovies(page)
+        return response.results
     }
 
-    fun getMovieCast(movie_id: Int): List<Actor>{
-        GlobalScope.launch(Dispatchers.IO){
-            val response = BackendAPI.invoke().movieCast(movie_id)
-            actors = response.cast
-        }
-        return actors
+    suspend fun getMovieCast(movie_id: Int): List<Actor> {
+        val response = BackendAPI.invoke().movieCast(movie_id)
+        return response.cast
     }
 }

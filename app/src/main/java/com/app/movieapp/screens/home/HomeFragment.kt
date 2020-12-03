@@ -14,8 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.app.movieapp.R
+import com.app.movieapp.adapters.CenterScaleLayoutManager
+import com.app.movieapp.adapters.MoviesAdapter
 import com.app.movieapp.databinding.FragmentHomeBinding
 import com.app.movieapp.databinding.MovieDetailLayoutBinding
+import com.app.movieapp.models.Movie
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
@@ -28,6 +31,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel.getMovies()
     }
 
     override fun onCreateView(
@@ -47,7 +51,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
-            mBinding.movies = movies
+            mBinding.homeRecyclerView.also {
+                it.setHasFixedSize(true)
+                it.layoutManager = CenterScaleLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                it.adapter = MoviesAdapter(requireContext(), movies)
+            }
         })
 
         mBinding.homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){

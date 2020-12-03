@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/cairo"
-            android:text="@{movie.movieTitle}"
+            android:text="@{movie.title}"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"

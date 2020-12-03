@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/cairo"
-            android:text="@{movie.movieTitle}"
+            android:text="@{movie.title}"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="32sp"
             android:textStyle="bold"

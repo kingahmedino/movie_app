@@ -7,6 +7,11 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.app.movieapp"
         minSdkVersion 21
@@ -46,6 +51,7 @@ dependencies {
 
     //lifecycle dependencies
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-livedata:2.2.0"
     kapt "androidx.lifecycle:lifecycle-common-java8:2.2.0"
 

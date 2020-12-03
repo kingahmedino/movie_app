@@ -13,8 +13,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class ActorsAdapter(
     private val mContext: Context,
-    private val mActorsList: MutableList<Actor>
+    private val mActorsList: List<Actor>
 ): RecyclerView.Adapter<ActorsAdapter.BindingHolder>() {
+    private val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w185"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingHolder {
         val binding = ActorListItemBinding.inflate(LayoutInflater.from(mContext), parent, false)
@@ -33,7 +34,7 @@ class ActorsAdapter(
 
         holder.mBinding?.actor = actor
         Glide.with(mContext)
-            .load(actor.image)
+            .load(IMAGE_BASE_URL + actor.profile_path)
             .placeholder(actor.placeHolderImg)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.mBinding?.actorImageView)
