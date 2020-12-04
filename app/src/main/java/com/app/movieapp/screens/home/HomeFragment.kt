@@ -1,13 +1,10 @@
 package com.app.movieapp.screens.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,8 +16,11 @@ import com.app.movieapp.adapters.MoviesAdapter
 import com.app.movieapp.databinding.FragmentHomeBinding
 import com.app.movieapp.databinding.MovieDetailLayoutBinding
 import com.app.movieapp.models.Movie
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.bottomsheet.BottomSheetDialog
+
+const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w780"
 
 class HomeFragment : Fragment() {
     private lateinit var mBinding: FragmentHomeBinding
@@ -53,15 +53,24 @@ class HomeFragment : Fragment() {
         viewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
             mBinding.homeRecyclerView.also {
                 it.setHasFixedSize(true)
-                it.layoutManager = CenterScaleLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                it.layoutManager = CenterScaleLayoutManager(
+                    requireContext(),
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
                 it.adapter = MoviesAdapter(requireContext(), movies)
             }
         })
 
-        mBinding.homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        mBinding.homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                changeBackgroundImage(recyclerView.layoutManager as LinearLayoutManager)
+                val movie =
+                    getCurrentlyVisibleMovie(recyclerView.layoutManager as LinearLayoutManager)
+                if (movie != null) {
+                    bottomSheetBinding.movie = movie
+                    setScreenBackground(IMAGE_BASE_URL + movie.backdrop_path)
+                }
             }
         })
 
@@ -70,13 +79,18 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun changeBackgroundImage(layoutManager: LinearLayoutManager) {
+    private fun getCurrentlyVisibleMovie(layoutManager: LinearLayoutManager): Movie? {
         val visiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition()
-        if (visiblePosition > -1){
-            val currentView = layoutManager.findViewByPosition(visiblePosition)
-            val drawable = currentView!!.findViewById<ImageView>(R.id.movie_image_view).drawable
-            mBinding.bgndImage.setImageDrawable(drawable)
-            bottomSheetBinding.movie = viewModel.movies.value?.get(visiblePosition)
+        if (visiblePosition > -1) {
+            return viewModel.movies.value?.get(visiblePosition)
         }
+        return null
+    }
+
+    private fun setScreenBackground(url: String?) {
+        Glide.with(requireContext())
+            .load(url)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(mBinding.bgndImage)
     }
 }
