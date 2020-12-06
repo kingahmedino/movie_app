@@ -8,5 +8,5 @@ data class Movie(
     val backdrop_path: String?,
     val overview: String?,
     val genre_ids: List<Int>,
-    val actors: List<Actor>?
+    var actors: List<Actor>?
 )

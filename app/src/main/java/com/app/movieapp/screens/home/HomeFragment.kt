@@ -52,6 +52,10 @@ class HomeFragment : Fragment() {
         viewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
             mBinding.movies = movies
         })
+        viewModel.actors.observe(viewLifecycleOwner, Observer { actors ->
+            bottomSheetBinding.movie?.actors = actors
+            bottomSheetDialog.show()
+        })
 
         mBinding.homeRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -66,7 +70,10 @@ class HomeFragment : Fragment() {
         })
 
         mBinding.button.setOnClickListener {
-            bottomSheetDialog.show()
+            val movie =
+                getCurrentlyVisibleMovie(mBinding.homeRecyclerView.layoutManager as LinearLayoutManager)
+            if (movie != null)
+                viewModel.getMovieActors(movie.id)
         }
     }
 

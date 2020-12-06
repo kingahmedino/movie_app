@@ -14,6 +14,7 @@ class HomeViewModel: ViewModel() {
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     val movies = MutableLiveData<List<Movie>>()
+    val actors = MutableLiveData<List<Actor>>()
 
     override fun onCleared() {
         super.onCleared()
@@ -30,9 +31,9 @@ class HomeViewModel: ViewModel() {
         }
     }
 
-//    fun getMovieActors(movie_id: Int): List<Actor>{
-//        viewModelScope.launch(Dispatchers.Default){
-//            return@launch MovieRepository.getMovieCast(movie_id)
-//        }
-//    }
+    fun getMovieActors(movie_id: Int){
+        uiScope.launch{
+            actors.postValue(MovieRepository.getMovieCast(movie_id))
+        }
+    }
 }
