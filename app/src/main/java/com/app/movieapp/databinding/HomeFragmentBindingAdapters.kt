@@ -26,28 +26,28 @@ fun setLayoutMarginEnd(view: View, dimen: Float) {
 }
 
 @BindingAdapter("moviesList")
-fun setMoviesList(recyclerView: RecyclerView, movies: MutableList<Movie>) {
+fun setMoviesList(recyclerView: RecyclerView, movies: List<Movie>?) {
     val layoutManager = recyclerView.layoutManager
     if (layoutManager == null) {
         recyclerView.layoutManager =
             CenterScaleLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
     }
     var adapter = recyclerView.adapter
-    if (adapter == null) {
+    if (adapter == null && movies != null) {
         adapter = MoviesAdapter(recyclerView.context, movies)
         recyclerView.adapter = adapter
     }
 }
 
 @BindingAdapter("actorsList")
-fun setMActorsList(recyclerView: RecyclerView, actors: MutableList<Actor>) {
+fun setMActorsList(recyclerView: RecyclerView, actors: List<Actor>?) {
     val layoutManager = recyclerView.layoutManager
     if (layoutManager == null) {
         recyclerView.layoutManager =
             LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
     }
     var adapter = recyclerView.adapter
-    if (adapter == null) {
+    if (adapter == null && actors != null) {
         adapter = ActorsAdapter(recyclerView.context, actors)
         recyclerView.adapter = adapter
     }
