@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = FragmentHomeBinding.inflate(inflater)
+        mBinding.isLoading = true
         bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         val bottomSheetView = inflater.inflate(R.layout.movie_detail_layout, null)
         bottomSheetBinding = MovieDetailLayoutBinding.bind(bottomSheetView)
@@ -51,6 +52,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
             mBinding.movies = movies
+            mBinding.isLoading = false
         })
         viewModel.actors.observe(viewLifecycleOwner, Observer { actors ->
             bottomSheetBinding.movie?.actors = actors
