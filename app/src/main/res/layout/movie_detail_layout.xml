@@ -5,9 +5,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="movie"
             type="com.app.movieapp.models.Movie" />
+
+        <variable
+            name="isDetailLoading"
+            type="java.lang.Boolean" />
 
     </data>
 
@@ -25,6 +31,7 @@
             android:fontFamily="@font/cairo"
             android:text="@{movie.title}"
             android:textColor="@color/colorPrimaryDark"
+            android:visibility="@{isDetailLoading ? View.INVISIBLE : View.VISIBLE}"
             android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +46,7 @@
             android:background="@drawable/stroked_box"
             android:fontFamily="@font/cairo"
             android:paddingStart="10dp"
+            android:visibility="@{isDetailLoading ? View.INVISIBLE : View.VISIBLE}"
             android:paddingEnd="10dp"
             android:text="Action"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
@@ -56,6 +64,7 @@
             android:background="@drawable/stroked_box"
             android:fontFamily="@font/cairo"
             android:paddingStart="10dp"
+            android:visibility="@{isDetailLoading ? View.INVISIBLE : View.VISIBLE}"
             android:paddingEnd="10dp"
             android:text="Drama"
             app:layout_constraintEnd_toStartOf="@+id/textView3"
@@ -71,6 +80,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/stroked_box"
             android:fontFamily="@font/cairo"
+            android:visibility="@{isDetailLoading ? View.INVISIBLE : View.VISIBLE}"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="History"
@@ -85,6 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/cairo"
+            android:visibility="@{isDetailLoading ? View.INVISIBLE : View.VISIBLE}"
             android:text="Director / Todd Phillips"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="@+id/movie_title"
@@ -98,6 +109,7 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/cairo"
             android:text="Actors"
+            android:visibility="@{isDetailLoading ? View.INVISIBLE : View.VISIBLE}"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -109,6 +121,7 @@
             actorsList="@{movie.actors}"
             android:layout_width="match_parent"
             android:layout_height="160dp"
+            android:visibility="@{isDetailLoading ? View.INVISIBLE : View.VISIBLE}"
             android:overScrollMode="never"
             android:scrollbars="none"
             app:layout_constraintStart_toStartOf="parent"
@@ -120,6 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:visibility="@{isDetailLoading ? View.INVISIBLE : View.VISIBLE}"
             android:fontFamily="@font/cairo"
             android:text="Introduction"
             android:textColor="@color/colorPrimaryDark"
@@ -134,6 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:visibility="@{isDetailLoading ? View.INVISIBLE : View.VISIBLE}"
             android:fontFamily="@font/roboto"
             android:lineSpacingExtra="3dp"
             android:text="@string/lorem2"
@@ -150,6 +165,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="28dp"
             android:background="@drawable/btn_bckgrnd"
+            android:visibility="@{isDetailLoading ? View.INVISIBLE : View.VISIBLE}"
             android:fontFamily="@font/cairo"
             android:text="Buy Ticket"
             android:textColor="@color/colorWhite"
@@ -159,6 +175,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="@{isDetailLoading ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

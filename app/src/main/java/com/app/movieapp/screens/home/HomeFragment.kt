@@ -60,6 +60,7 @@ class HomeFragment : Fragment() {
                 getCurrentlyVisibleMovie(mBinding.homeRecyclerView.layoutManager as LinearLayoutManager)
             if (movie != null){
                 movie.actors = actors
+                bottomSheetBinding.isDetailLoading = false
                 bottomSheetBinding.movie = movie
             }
         })
@@ -81,6 +82,7 @@ class HomeFragment : Fragment() {
                 getCurrentlyVisibleMovie(mBinding.homeRecyclerView.layoutManager as LinearLayoutManager)
             if (movie != null)
                 viewModel.getMovieActors(movie.id)
+            bottomSheetBinding.isDetailLoading = true
             bottomSheetDialog.show()
         }
     }
