@@ -46,9 +46,7 @@ fun setMActorsList(recyclerView: RecyclerView, actors: List<Actor>?) {
         recyclerView.layoutManager =
             LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
     }
-    var adapter = recyclerView.adapter
-    if (adapter == null && actors != null) {
-        adapter = ActorsAdapter(recyclerView.context, actors)
-        recyclerView.adapter = adapter
+    if (actors != null) {
+        recyclerView.adapter = ActorsAdapter(recyclerView.context, actors)
     }
 }
